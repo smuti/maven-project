@@ -22,13 +22,13 @@ pipeline {
                 }
             }
         }
-        stage('Deployment') {
+        stage('Deploy to Staging') {
             // parallel {
-                stage('Deploy to Staging') {
+                // stage('Deploy to Staging') {
                     steps {
                         sh "scp -i /home/sabrimutlucag/Projects/maven-project/tomcatdemo.pem **/target/*.war ec2-user@${params.tomcat_stage}:/home/ec2-user/apache-tomcat-8.5.35/webapps"
                     }
-                }
+                // }
 
                 // stage('Deploy to Production') {
                 //     steps{
