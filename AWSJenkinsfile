@@ -4,6 +4,7 @@ pipeline {
     parameters {
         string(name: 'tomcat_stage', defaultValue:'34.216.26.90', description:'Staging Server IP')
         string(name: 'tomcat_prod', defaultValue:'34.212.84.79', description:'Production Server IP')
+        string(name: 'pem_path', defaultValue:'/home/sabrimutlucag/Projects/maven-project/tomcatdemo.pem', description: 'Dummy')
     }
 
     triggers {
@@ -26,13 +27,13 @@ pipeline {
             parallel {
                 stage('Deploy to Staging') {
                     steps {
-                        sh "scp -i ${LOADME} **/target/*.war ec2-user@${params.tomcat_stage}:/home/ec2-user/apache-tomcat-8.5.35/webapps"
+                        sh "scp -i ${params.pem_path} **/target/*.war ec2-user@${params.tomcat_stage}:/home/ec2-user/apache-tomcat-8.5.35/webapps"
                     }
                 }
 
                 stage('Deploy to Production') {
                     steps{
-                         sh "scp -i ${env.LOADME} **/target/*.war ec2-user@${params.tomcat_prod}:/opt/tomcat/webapps"
+                         sh "scp -i ${params.pem_path} **/target/*.war ec2-user@${params.tomcat_prod}:/opt/tomcat/webapps"
                     }
                 }
             }
