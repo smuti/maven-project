@@ -26,7 +26,7 @@ pipeline {
             // parallel {
                 // stage('Deploy to Staging') {
                     steps {
-                        sh "scp -i /home/sabrimutlucag/Projects/maven-project/tomcatdemo.pem **/target/*.war ec2-user@34.216.26.90:/home/ec2-user/apache-tomcat-8.5.35/webapps"
+                        sh "scp -i tomcatdemo.pem **/target/*.war ec2-user@34.216.26.90:/home/ec2-user/apache-tomcat-8.5.35/webapps"
                     }
                 // }
 
